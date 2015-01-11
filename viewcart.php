@@ -1,0 +1,105 @@
+<?php 
+include('connection.php');
+session_start();
+?>
+<!DOCTYPE HTML>
+<html>
+<head>
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+		<title>EasyVeggies</title>
+		<meta name="description" content="Creative Link Effects: Subtle and modern effects for links or menu items" />
+		<meta name="keywords" content="link effect, css transition, style, inspiration, css3, menu item, web design" />
+		<meta name="author" content="Codrops" />
+		<link rel="shortcut icon" href="../favicon.ico">
+		<link rel="stylesheet" type="text/css" href="css/normalize.css" />
+		<link rel="stylesheet" type="text/css" href="css/demo.css" />
+		<link rel="stylesheet" type="text/css" href="css/component.css" />
+		<script src="js/modernizr.custom.js"></script>
+	</head>
+	<body>
+		<div class="container">
+<header>
+				<h1>WELCOME:<i><?php echo $login_session; ?></i></h1>
+				
+<?php 
+echo "You are logged in as :";
+$var= $login_session;
+echo $var; ?>				
+</header>
+<section style="padding: 0px"class="color-1">
+				<nav class="cl-effect-4">
+					
+					<?php
+
+
+// define variables and set to empty values
+$ROLL_NO = $FNAME = $LNAME = $FATHERNAME = $MOTHERNAME = $ADDRESS =   $PROG_STUDY = $STREAM = $ENROLLEDYEAR = $CURRENTYEAR = "";
+
+$servername ="localhost";
+$username ="root";
+$password ="redeemer";
+$dbname ="farmer";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  
+    $aDoor = $_POST['checked'];
+  if(empty($aDoor))
+  {
+    echo("No orders have yet been delivered.<br>");
+  }
+  else
+  {
+    $N = count($aDoor);
+ 
+    echo("You have confirmed $N order(s) to have been delivered.<br><br><br> ");
+	echo("Consquently the pending orders have been updated.<br> ");
+    for($i=0; $i < $N; $i++)
+    {	$userr=$aDoor[$i];
+	echo "<br><br>";
+	echo $userr;
+	echo "hooooo";
+	/*$sql2="select count(user) as count from orders where vegetable=carrot";
+	$res2=mysqli_fetch_array($conn,$sql2) or die("fir se!!!!");
+	$cnt2=$res2['count'];
+	echo $cnt2;*/
+	$sql1="delete from orders where (user='$userr')";
+	$res1=mysqli_query($conn,$sql1) or die("error!!!");
+	
+     
+    }
+  }
+}
+   
+
+
+
+?> 
+				<br><br><br><br><a href="seeallorders.php" data-hover="CLICK "><span>BACK</span></a>	
+				<br><br><br><br><a href="logout.php" data-hover="CLICK "><span>LOGOUT</span></a>	
+				</nav>
+			</section>	
+	
+			<section class="color-1">
+				
+			</section>
+			
+		</div><!-- /container -->
+	</body>
+</html>
+
+</body>
+</html>
